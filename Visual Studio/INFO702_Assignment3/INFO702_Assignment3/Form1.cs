@@ -56,6 +56,11 @@ namespace INFO702_Assignment3
         {
             resultsBox.Clear();
 
+            if (emailTextBox.Text == null)
+            {
+                resultsBox.Text = "Please enter an email";
+            }
+
             // Create the client
             var settings = new HaveIBeenPwnedClientSettings()
             {
@@ -65,11 +70,7 @@ namespace INFO702_Assignment3
 
             using (var client = new HaveIBeenPwnedClient(settings))
             {
-                if (emailTextBox.Text == null)
-                {
-                    resultsBox.Text = "Please enter an email";
-                }
-
+                
                 // Get the breaches for an account. This returns a collection of breaches with their 
                 // name. Use the response from GetAllBreachesAsync() to find the corresponding details 
                 // by name

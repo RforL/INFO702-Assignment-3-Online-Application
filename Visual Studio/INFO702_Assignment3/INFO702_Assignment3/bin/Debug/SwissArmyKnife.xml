@@ -1,0 +1,896 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SwissArmyKnife</name>
+    </assembly>
+    <members>
+        <member name="T:SwissArmyKnife.Cryptography.Fnv1a32">
+            <summary>
+            An 32-bits Fowler-Noll-Vo 1a implementation
+            </summary>
+            <remarks>
+            FNV is not intended to be a cryptographically safe
+            hash function
+            </remarks>
+        </member>
+        <member name="M:SwissArmyKnife.Cryptography.Fnv1a32.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:SwissArmyKnife.Cryptography.Fnv1a32"/>
+            </summary>
+        </member>
+        <member name="T:SwissArmyKnife.Cryptography.Fnv1a64">
+            <summary>
+            An 64-bits Fowler-Noll-Vo 1a implementation
+            </summary>
+            <remarks>
+            FNV is not intended to be a cryptographically safe
+            hash function
+            </remarks>
+        </member>
+        <member name="M:SwissArmyKnife.Cryptography.Fnv1a64.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:SwissArmyKnife.Cryptography.Fnv1a32"/>
+            </summary>
+        </member>
+        <member name="T:SwissArmyKnife.Cryptography.Fnv1aBase">
+            <summary>
+            An base class for Fowler-Noll-Vo 1a implementations
+            </summary>
+            <remarks>
+            FNV is not intended to be a cryptographically safe
+            hash function
+            </remarks>
+        </member>
+        <member name="M:SwissArmyKnife.Cryptography.Fnv1aBase.#ctor(System.UInt64,System.UInt64)">
+            <summary>
+            Initializes a new instance of <see cref="T:SwissArmyKnife.Cryptography.Fnv1aBase"/>
+            </summary>
+            <param name="offsetBasis">
+            The offset basis for the Fowler-Noll-Vo
+            algorithm
+            </param>
+            <param name="fnvPrime">
+            The prime to use in the Fowler-Noll-Vo
+            algorithm
+            </param>
+        </member>
+        <member name="M:SwissArmyKnife.Cryptography.Fnv1aBase.HashCore(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Routes data written to the object into the hash 
+            algorithm for computing the hash
+            </summary>
+            <param name="array">
+            The input to compute the hash code for
+            </param>
+            <param name="ibStart">
+            The offset into the byte array from which to begin 
+            using data
+            </param>
+            <param name="cbSize">
+            The number of bytes in the byte array to use as 
+            data
+            </param>
+        </member>
+        <member name="M:SwissArmyKnife.Cryptography.Fnv1aBase.HashFinal">
+            <summary>
+            Finalizes the hash computation after the last data 
+            is processed by the cryptographic stream object
+            </summary>
+            <returns>
+            The computed hash code
+            </returns>
+        </member>
+        <member name="M:SwissArmyKnife.Cryptography.Fnv1aBase.Initialize">
+            <summary>
+            Initializes this implementation
+            of the <see cref="T:System.Security.Cryptography.HashAlgorithm"/>
+            class
+            </summary>
+        </member>
+        <member name="T:SwissArmyKnife.DataStructures.BloomFilter">
+            <summary>
+            Represents a Bloom filter data structure
+            </summary>
+        </member>
+        <member name="M:SwissArmyKnife.DataStructures.BloomFilter.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of <see cref="T:SwissArmyKnife.DataStructures.BloomFilter"/>
+            </summary>
+            <param name="size">
+            The number of buckets
+            </param>
+        </member>
+        <member name="M:SwissArmyKnife.DataStructures.BloomFilter.Add(System.Byte[])">
+            <summary>
+            Add data to the filter
+            </summary>
+            <param name="input">
+            The data to add
+            </param>
+        </member>
+        <member name="M:SwissArmyKnife.DataStructures.BloomFilter.Test(System.Byte[])">
+            <summary>
+            Test whether the input is probably
+            in the filter, or absolutely not
+            </summary>
+            <returns>
+            True if the data is probably in the
+            filter, false otherwise
+            </returns>
+        </member>
+        <member name="M:SwissArmyKnife.DataStructures.BloomFilter.GetHashes(System.Byte[])">
+            <summary>
+            Get three hash values to determine the 
+            places in the buckets
+            </summary>
+            <param name="input">
+            </param>
+            <returns></returns>
+        </member>
+        <member name="T:SwissArmyKnife.DataStructures.CircularBuffer`1">
+            <summary>
+            Represents a strongly typed circular buffer
+            
+            This class is thread-safe
+            </summary>
+            <typeparam name="T">
+            The type of items stored in the buffer
+            </typeparam>
+        </member>
+        <member name="P:SwissArmyKnife.DataStructures.CircularBuffer`1.Size">
+            <summary>
+            Gets the size of the buffer
+            </summary>
+        </member>
+        <member name="P:SwissArmyKnife.DataStructures.CircularBuffer`1.Count">
+            <summary>
+            Gets the number of items in the buffer
+            </summary>
+        </member>
+        <member name="F:SwissArmyKnife.DataStructures.CircularBuffer`1._buffer">
+            <summary>
+            Gets the array to buffer data in
+            </summary>
+        </member>
+        <member name="F:SwissArmyKnife.DataStructures.CircularBuffer`1._tail">
+            <summary>
+            Gets the position in the buffer where the tail is
+            </summary>
+        </member>
+        <member name="F:SwissArmyKnife.DataStructures.CircularBuffer`1._head">
+            <summary>
+            Gets the position in the buffer where the head is
+            </summary>
+        </member>
+        <member name="F:SwissArmyKnife.DataStructures.CircularBuffer`1._lock">
+            <summary>
+            Gets the object to lock on for thread safety
+            </summary>
+        </member>
+        <member name="M:SwissArmyKnife.DataStructures.CircularBuffer`1.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of <see cref="T:SwissArmyKnife.DataStructures.CircularBuffer`1"/>
+            </summary>
+            <param name="size">
+            The size of the buffer
+            </param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Is thrown when the specified size is less than 1
+            </exception>
+        </member>
+        <member name="M:SwissArmyKnife.DataStructures.CircularBuffer`1.Add(`0)">
+            <summary>
+            Add an item to the buffer
+            </summary>
+            <param name="itemToAdd">
+            The item to add to the buffer
+            </param>
+            <returns>
+            The overwritten item in the buffer, or default when the position in
+            the buffer was empty
+            </returns>
+        </member>
+        <member name="M:SwissArmyKnife.DataStructures.CircularBuffer`1.Get">
+            <summary>
+            Get the current item from the buffer
+            </summary>
+            <returns>
+            The current item, or default if the position was empty
+            </returns>
+            <exception cref="T:System.InvalidOperationException">
+            Is thrown when the buffer is empty
+            </exception>
+        </member>
+        <member name="M:SwissArmyKnife.DataStructures.CircularBuffer`1.GetEnumerator">
+            <summary>
+            Returns an <see cref="T:System.Collections.Generic.IEnumerator`1"/> that iterates through this
+            <see cref="T:SwissArmyKnife.DataStructures.CircularBuffer`1"/>
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.Generic.IEnumerator`1"/> that iterates through this <see cref="T:SwissArmyKnife.DataStructures.CircularBuffer`1"/>
+            </returns>
+        </member>
+        <member name="M:SwissArmyKnife.DataStructures.CircularBuffer`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an <see cref="T:System.Collections.IEnumerator"/> that iterates through this
+            <see cref="T:SwissArmyKnife.DataStructures.CircularBuffer`1"/>
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerator"/> that iterates through this <see cref="T:SwissArmyKnife.DataStructures.CircularBuffer`1"/>
+            </returns>
+        </member>
+        <member name="T:SwissArmyKnife.DataStructures.IBloomFilter">
+            <summary>
+            Represents a Bloom filter data structure
+            </summary>
+        </member>
+        <member name="M:SwissArmyKnife.DataStructures.IBloomFilter.Add(System.Byte[])">
+            <summary>
+            Add data to the filter
+            </summary>
+            <param name="input">
+            The data to add
+            </param>
+        </member>
+        <member name="M:SwissArmyKnife.DataStructures.IBloomFilter.Test(System.Byte[])">
+            <summary>
+            Test whether the input is probably
+            in the filter, or absolutely not
+            </summary>
+            <returns>
+            True if the data is probably in the
+            filter, false otherwise
+            </returns>
+        </member>
+        <member name="T:SwissArmyKnife.DataStructures.ICircularBuffer">
+            <summary>
+            Represents a circular buffer
+            </summary>
+        </member>
+        <member name="P:SwissArmyKnife.DataStructures.ICircularBuffer.Size">
+            <summary>
+            Gets the size of the buffer
+            </summary>
+        </member>
+        <member name="P:SwissArmyKnife.DataStructures.ICircularBuffer.Count">
+            <summary>
+            Gets the number of items in the buffer
+            </summary>
+        </member>
+        <member name="T:SwissArmyKnife.DataStructures.ICircularBuffer`1">
+            <summary>
+            Represents a strongly-typed circular buffer
+            </summary>
+            <typeparam name="T">
+            The type of items stored in the buffer
+            </typeparam>
+        </member>
+        <member name="M:SwissArmyKnife.DataStructures.ICircularBuffer`1.Add(`0)">
+            <summary>
+            Add an item to the buffer
+            </summary>
+            <param name="itemToAdd">
+            The item to add to the buffer
+            </param>
+            <returns>
+            The overwritten item in the buffer, or default when the position in
+            the buffer was empty
+            </returns>
+        </member>
+        <member name="M:SwissArmyKnife.DataStructures.ICircularBuffer`1.Get">
+            <summary>
+            Get the current item from the buffer
+            </summary>
+            <returns>
+            The current item, or default if the position was empty
+            </returns>
+            <exception cref="T:System.InvalidOperationException">
+            Is thrown when the buffer is empty
+            </exception>
+        </member>
+        <member name="T:SwissArmyKnife.Disposable">
+            <summary>
+            Implements the Disposable pattern and is used
+            as a base class for disposable resources
+            </summary>
+            <remarks>
+            This class is thread-safe
+            </remarks>
+        </member>
+        <member name="F:SwissArmyKnife.Disposable._disposed">
+            <summary>
+            Holds the value to track the disposed state. As
+            long as the value is 0 the object is not disposed
+            </summary>
+        </member>
+        <member name="P:SwissArmyKnife.Disposable.IsDisposed">
+            <summary>
+            Gets the state of the disposable object
+            </summary>
+        </member>
+        <member name="M:SwissArmyKnife.Disposable.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:SwissArmyKnife.Disposable"/>
+            </summary>
+        </member>
+        <member name="M:SwissArmyKnife.Disposable.Dispose">
+            <summary>
+            Performs application-defined tasks associated with 
+            freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:SwissArmyKnife.Disposable.Dispose(System.Boolean)">
+            <summary>
+            Performs application-defined tasks associated with 
+            freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <param name="disposing">
+            True when disposing, false when finalizing
+            </param>
+        </member>
+        <member name="M:SwissArmyKnife.Disposable.ThrowIfDisposed">
+            <summary>
+            Utility method for throwing an <see cref="T:System.ObjectDisposedException"/>
+            when this <see cref="T:SwissArmyKnife.Disposable"/> object is disposed
+            </summary>
+        </member>
+        <member name="T:SwissArmyKnife.IComparableExtensions">
+            <summary>
+            Extension methods for <see cref="T:System.IComparable`1"/>
+            </summary>
+        </member>
+        <member name="M:SwissArmyKnife.IComparableExtensions.IsBetween``1(``0,``0,``0)">
+            <summary>
+            Checks whether the object is equal to or between the supplied upper
+            and lower values
+            </summary>
+            <param name="value">
+            </param>
+            <param name="lower">
+            The lower bound
+            </param>
+            <param name="upper">
+            The upper bound
+            </param>
+            <returns>
+            True if the value is between or equal to the lower or upper value,
+            false otherwise
+            </returns>
+        </member>
+        <member name="T:SwissArmyKnife.IntExtensions">
+            <summary>
+            Extension methods for <see cref="T:System.Int32"/>
+            </summary>
+        </member>
+        <member name="M:SwissArmyKnife.IntExtensions.MilliSeconds(System.Int32)">
+            <summary>
+            Gets a <see cref="T:System.TimeSpan"/> for the specified number of milliseconds
+            </summary>
+            <param name="value">
+            The value to convert
+            </param>
+            <returns>
+            The <see cref="T:System.TimeSpan"/> for the specified number of milliseconds
+            </returns>
+        </member>
+        <member name="M:SwissArmyKnife.IntExtensions.Seconds(System.Int32)">
+            <summary>
+            Gets a <see cref="T:System.TimeSpan"/> for the specified number of seconds
+            </summary>
+            <param name="value">
+            The value to convert
+            </param>
+            <returns>
+            The <see cref="T:System.TimeSpan"/> for the specified number of seconds
+            </returns>
+        </member>
+        <member name="M:SwissArmyKnife.IntExtensions.Minutes(System.Int32)">
+            <summary>
+            Gets a <see cref="T:System.TimeSpan"/> for the specified number of minutes
+            </summary>
+            <param name="value">
+            The value to convert
+            </param>
+            <returns>
+            The <see cref="T:System.TimeSpan"/> for the specified number of minutes
+            </returns>
+        </member>
+        <member name="M:SwissArmyKnife.IntExtensions.Hours(System.Int32)">
+            <summary>
+            Gets a <see cref="T:System.TimeSpan"/> for the specified number of hours
+            </summary>
+            <param name="value">
+            The value to convert
+            </param>
+            <returns>
+            The <see cref="T:System.TimeSpan"/> for the specified number of hours
+            </returns>
+        </member>
+        <member name="M:SwissArmyKnife.IntExtensions.Days(System.Int32)">
+            <summary>
+            Gets a <see cref="T:System.TimeSpan"/> for the specified number of days
+            </summary>
+            <param name="value">
+            The value to convert
+            </param>
+            <returns>
+            The <see cref="T:System.TimeSpan"/> for the specified number of days
+            </returns>
+        </member>
+        <member name="T:SwissArmyKnife.ObjectExtensions">
+            <summary> 
+            Generic extension methods
+            </summary>
+        </member>
+        <member name="M:SwissArmyKnife.ObjectExtensions.IsAnyOf``1(``0,``0)">
+            <summary>
+            Checks if the object is equal to the supplied value
+            </summary>
+            <param name="source"></param>
+            <param name="value">The value to check the object against</param>
+            <returns>True if the object is equal to the value, false otherwise</returns>
+        </member>
+        <member name="M:SwissArmyKnife.ObjectExtensions.IsAnyOf``1(``0,``0,``0)">
+            <summary>
+            Checks if the object is equal to the supplied values
+            </summary>
+            <param name="source"></param>
+            <param name="value0">The first value to check the object against</param>
+            <param name="value1">The second value to check the object against</param>
+            <returns>True if the object is equal to any of the values, false otherwise</returns>
+        </member>
+        <member name="M:SwissArmyKnife.ObjectExtensions.IsAnyOf``1(``0,``0,``0,``0)">
+            <summary>
+            Checks if the object is equal to the supplied values
+            </summary>
+            <param name="source"></param>
+            <param name="value0">The first value to check the object against</param>
+            <param name="value1">The second value to check the object against</param>
+            <param name="value2">The second value to check the object against</param>
+            <returns>True if the object is equal to any of the values, false otherwise</returns>
+        </member>
+        <member name="M:SwissArmyKnife.ObjectExtensions.IsAnyOf``1(``0,``0,``0,``0,``0)">
+            <summary>
+            Checks if the object is equal to the supplied values
+            </summary>
+            <param name="source"></param>
+            <param name="value0">The first value to check the object against</param>
+            <param name="value1">The second value to check the object against</param>
+            <param name="value2">The second value to check the object against</param>
+            <param name="value3">The second value to check the object against</param>
+            <returns>True if the object is equal to any of the values, false otherwise</returns>
+        </member>
+        <member name="M:SwissArmyKnife.ObjectExtensions.IsAnyOf``1(``0,``0[])">
+            <summary>
+            Checks if the object is equal to any of the supplied values
+            </summary>
+            <param name="source"></param>
+            <param name="values">The values to check the object against</param>
+            <returns>True if the object is equal to any of the values, false otherwise</returns>
+        </member>
+        <member name="T:SwissArmyKnife.Pools.GenericObjectPool">
+            <summary>
+            A generic <see cref="T:SwissArmyKnife.Pools.IObjectPool"/> for multiple types
+            </summary>
+            <remarks>
+            This type is threadsafe
+            </remarks>
+        </member>
+        <member name="M:SwissArmyKnife.Pools.GenericObjectPool.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:SwissArmyKnife.Pools.GenericObjectPool"/>
+            </summary>
+        </member>
+        <member name="M:SwissArmyKnife.Pools.GenericObjectPool.Add``1(``0)">
+            <summary>
+            Add a <see cref="T:SwissArmyKnife.Pools.IPoolableObject"/> to the pool
+            </summary>
+            <param name="objectToAdd">
+            The object to add to the pool
+            </param>
+        </member>
+        <member name="M:SwissArmyKnife.Pools.GenericObjectPool.Get``1">
+            <summary>
+            Get a <see cref="T:SwissArmyKnife.Pools.IPoolableObject"/> from the pool
+            </summary>
+            <returns>
+            A <see cref="T:SwissArmyKnife.Pools.IPoolableObject"/> from the pool or null
+            when the pool is exhausted
+            </returns>
+        </member>
+        <member name="M:SwissArmyKnife.Pools.GenericObjectPool.TryGet``1(``0@)">
+            <summary>
+            Try to get a <see cref="T:SwissArmyKnife.Pools.IPoolableObject"/> from the pool
+            </summary>
+            <typeparam name="T">
+            The type of the object to get from the pool
+            </typeparam>
+            <param name="objectFromPool">
+            </param>
+            <returns>
+            True when an object was retrieved from the pool, false otherwise
+            </returns>
+        </member>
+        <member name="M:SwissArmyKnife.Pools.GenericObjectPool.Return``1(``0)">
+            <summary>
+            Return or add a <see cref="T:SwissArmyKnife.Pools.IPoolableObject"/> to the pool
+            </summary>
+            <param name="objectToReturn">
+            The <see cref="T:SwissArmyKnife.Pools.IPoolableObject"/> to return to the pool
+            </param>
+            <remarks>
+            Returning an object to a full <see cref="T:SwissArmyKnife.Pools.IObjectPool"/>
+            silently disposes the returned object
+            </remarks>
+        </member>
+        <member name="T:SwissArmyKnife.Pools.IObjectPool">
+            <summary>
+            Represents a pool for long-lived reusable objects
+            </summary>
+        </member>
+        <member name="M:SwissArmyKnife.Pools.IObjectPool.Add``1(``0)">
+            <summary>
+            Add a <see cref="T:SwissArmyKnife.Pools.IPoolableObject"/> to the pool
+            </summary>
+            <param name="objectToAdd">
+            The object to add to the pool
+            </param>
+            <typeparam name="T">
+            The type of the object to add to the pool
+            </typeparam>
+        </member>
+        <member name="M:SwissArmyKnife.Pools.IObjectPool.Get``1">
+            <summary>
+            Get a <see cref="T:SwissArmyKnife.Pools.IPoolableObject"/> from the pool
+            </summary>
+            <returns>
+            A <see cref="T:SwissArmyKnife.Pools.IPoolableObject"/> from the pool or null
+            when the pool is exhausted
+            </returns>
+            <typeparam name="T">
+            The type of the object to get from the pool
+            </typeparam>
+        </member>
+        <member name="M:SwissArmyKnife.Pools.IObjectPool.TryGet``1(``0@)">
+            <summary>
+            Try to get a <see cref="T:SwissArmyKnife.Pools.IPoolableObject"/> from the pool
+            </summary>
+            <typeparam name="T">
+            The type of the object to get from the pool
+            </typeparam>
+            <param name="objectFromPool">
+            </param>
+            <returns>
+            True when an object was retrieved from the pool, false otherwise
+            </returns>
+        </member>
+        <member name="M:SwissArmyKnife.Pools.IObjectPool.Return``1(``0)">
+            <summary>
+            Return or add a <see cref="T:SwissArmyKnife.Pools.IPoolableObject"/> to the pool
+            </summary>
+            <param name="objectToReturn">
+            The <see cref="T:SwissArmyKnife.Pools.IPoolableObject"/> to return to the pool
+            </param>
+            <typeparam name="T">
+            The type of the object to return to the pool
+            </typeparam>
+        </member>
+        <member name="T:SwissArmyKnife.Pools.IPoolableObject">
+            <summary>
+            Represents poolable objects
+            </summary>
+        </member>
+        <member name="P:SwissArmyKnife.Pools.IPoolableObject.Pool">
+            <summary>
+            Gets or sets the managing <see cref="T:SwissArmyKnife.Pools.IObjectPool"/> for this object
+            </summary>
+        </member>
+        <member name="M:SwissArmyKnife.Pools.IPoolableObject.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting
+            unmanaged resources and return it to the <see cref="T:SwissArmyKnife.Pools.IObjectPool"/>
+            </summary>
+            <example>
+            public void Dispose()
+            {
+                // Reset the object for reuse
+                
+                // Return it to the pool
+                GC.SuppressFinalize(this);
+                this.Pool.Return(this);
+            }
+            </example>
+        </member>
+        <member name="T:SwissArmyKnife.Pools.PoolableObject">
+            <summary>
+            Base class for poolable objects
+            </summary>
+        </member>
+        <member name="P:SwissArmyKnife.Pools.PoolableObject.Pool">
+            <summary>
+            Gets or sets the managing <see cref="T:SwissArmyKnife.Pools.IObjectPool"/> for this object
+            </summary>
+        </member>
+        <member name="M:SwissArmyKnife.Pools.PoolableObject.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting
+            unmanaged resources and return it to the <see cref="T:SwissArmyKnife.Pools.IObjectPool"/>
+            </summary>
+        </member>
+        <member name="M:SwissArmyKnife.Pools.PoolableObject.Reset">
+            <summary>
+            Resets the instance to its initial state. Free, release or reset managed resources
+            </summary>
+        </member>
+        <member name="M:SwissArmyKnife.Pools.PoolableObject.Dispose(System.Boolean)">
+            <summary>
+            Return this instance back to the <see cref="T:SwissArmyKnife.Pools.IObjectPool"/>
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:SwissArmyKnife.StopwatchExtensions">
+            <summary>
+            Extension methods for <see cref="T:System.Diagnostics.Stopwatch"/>
+            </summary>
+        </member>
+        <member name="M:SwissArmyKnife.StopwatchExtensions.GetElapsedAndRestart(System.Diagnostics.Stopwatch)">
+            <summary>
+            Get the current value of the <see cref="T:System.Diagnostics.Stopwatch"/>
+            and restart the timer
+            </summary>
+            <param name="sw"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SwissArmyKnife.StreamExtensions">
+            <summary>
+            Extension methods for <see cref="T:System.IO.Stream"/>
+            </summary>
+        </member>
+        <member name="M:SwissArmyKnife.StreamExtensions.Reset(System.IO.Stream)">
+            <summary>
+            Reset the position within the stream 
+            back to the beginning
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="T:SwissArmyKnife.StringBuilderExtensions">
+            <summary>
+            Extension methods for <see cref="T:System.Text.StringBuilder"/>
+            </summary>
+        </member>
+        <member name="M:SwissArmyKnife.StringBuilderExtensions.AppendFormatLine(System.Text.StringBuilder,System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Appends a line by processing a composite format string, which
+            contains zero of more format items
+            </summary>
+            <param name="sb">
+            </param>
+            <param name="provider">
+            An object that supplies culture-specific formatting information
+            </param>
+            <param name="format">
+            A composite format string
+            </param>
+            <param name="args">
+            An object array that contains zero or more objects to format
+            </param>
+        </member>
+        <member name="M:SwissArmyKnife.StringBuilderExtensions.AppendFormatLine(System.Text.StringBuilder,System.String,System.Object)">
+            <summary>
+            Appends a line by processing a composite format string, which
+            contains zero of more format items
+            </summary>
+            <param name="sb">
+            </param>
+            <param name="format">
+            A composite format string
+            </param>
+            <param name="arg0">
+            The object to format
+            </param>
+        </member>
+        <member name="M:SwissArmyKnife.StringBuilderExtensions.AppendFormatLine(System.Text.StringBuilder,System.String,System.Object,System.Object)">
+            <summary>
+            Appends a line by processing a composite format string, which
+            contains zero of more format items
+            </summary>
+            <param name="sb">
+            </param>
+            <param name="format">
+            A composite format string
+            </param>
+            <param name="arg0">
+            The first object to format
+            </param>
+            <param name="arg1">
+            The second object to format
+            </param>
+        </member>
+        <member name="M:SwissArmyKnife.StringBuilderExtensions.AppendFormatLine(System.Text.StringBuilder,System.String,System.Object,System.Object,System.Object)">
+            <summary>
+            Appends a line by processing a composite format string, which
+            contains zero of more format items
+            </summary>
+            <param name="sb">
+            </param>
+            <param name="format">
+            A composite format string
+            </param>
+            <param name="arg0">
+            The first object to format
+            </param>
+            <param name="arg1">
+            The second object to format
+            </param>
+            <param name="arg2">
+            The third object to format
+            </param>
+        </member>
+        <member name="M:SwissArmyKnife.StringBuilderExtensions.AppendFormatLine(System.Text.StringBuilder,System.String,System.Object[])">
+            <summary>
+            Appends a line by processing a composite format string, which
+            contains zero of more format items
+            </summary>
+            <param name="sb"></param>
+            <param name="format">
+            A composite format string
+            </param>
+            <param name="args">
+            An object array that contains zero or more objects to format
+            </param>
+        </member>
+        <member name="T:SwissArmyKnife.StringExtensions">
+            <summary>
+            Extension methods for <see cref="T:System.String"/>
+            </summary>
+        </member>
+        <member name="M:SwissArmyKnife.StringExtensions.FormatWith(System.String,System.Object)">
+            <summary>
+            Replaces the format item in a specified string with the string
+            representation of the specified object
+            </summary>
+            <param name="source">
+            A composite format string
+            </param>
+            <param name="arg0">
+            The object to format
+            </param>
+            <returns>
+            A copy of the string in which any format items are replaced by the
+            string representation of arg0
+            </returns>
+        </member>
+        <member name="M:SwissArmyKnife.StringExtensions.FormatWith(System.String,System.Object,System.Object)">
+            <summary>
+            Replaces the format items in a specified string with the string
+            representation of two specified objects
+            </summary>
+            <param name="source">
+            A composite format string
+            </param>
+            <param name="arg0">
+            The first object to format
+            </param>
+            <param name="arg1">
+            The second object to format
+            </param>
+            <returns>
+            A copy of the string in which any format items are replaced by the
+            string representation of arg0 and arg1
+            </returns>
+        </member>
+        <member name="M:SwissArmyKnife.StringExtensions.FormatWith(System.String,System.Object,System.Object,System.Object)">
+            <summary>
+            Replaces the format items in a specified string with the string
+            representation of three specified objects
+            </summary>
+            <param name="source">
+            A composite format string
+            </param>
+            <param name="arg0">
+            The first object to format
+            </param>
+            <param name="arg1">
+            The second object to format
+            </param>
+            <param name="arg2">
+            The third object to format
+            </param>
+            <returns>
+            A copy of the string in which any format items are replaced by the
+            string representation of arg0, arg1 and arg2
+            </returns>
+        </member>
+        <member name="M:SwissArmyKnife.StringExtensions.FormatWith(System.String,System.Object[])">
+            <summary>
+            Replaces the format item in a specified string with the string
+            representation of a corresponding object in a specified array
+            </summary>
+            <param name="source">
+            A composite format string
+            </param>
+            <param name="args">
+            An object array that contains zero or more objects to format
+            </param>
+            <returns>
+            A copy of the string in which the format items have been replaced by
+            the string representation of the corresponding objects in args
+            </returns>
+        </member>
+        <member name="M:SwissArmyKnife.StringExtensions.FormatWith(System.String,System.IFormatProvider,System.Object[])">
+            <summary>
+            Replaces the format item in a specified string with the string
+            representation of a corresponding object in a specified array
+            </summary>
+            <param name="source">
+            A composite format string
+            </param>
+            <param name="formatProvider">
+            An object that supplies culture-specific formatting information
+            </param>
+            <param name="args">
+            An object array that contains zero or more objects to format
+            </param>
+            <returns>
+            A copy of the string in which the format items have been replaced by
+            the string representation of the corresponding objects in args
+            </returns>
+        </member>
+        <member name="M:SwissArmyKnife.StringExtensions.Truncate(System.String,System.Int32)">
+            <summary>
+            Truncates this instance to the specified length
+            </summary>
+            <param name="source"></param>
+            <param name="length">The length to truncate to</param>
+            <returns>The truncated <see cref="T:System.String"/></returns>
+        </member>
+        <member name="M:SwissArmyKnife.StringExtensions.Truncate(System.String,System.Int32,System.String)">
+            <summary>
+            Truncates this instance to the specified length
+            </summary>
+            <param name="source"></param>
+            <param name="length">The length to truncate to</param>
+            <param name="suffix">The suffix to append to the truncated <see cref="T:System.String"/></param>
+            <returns>The truncated <see cref="T:System.String"/></returns>
+        </member>
+        <member name="M:SwissArmyKnife.StringExtensions.IsNullOrEmpty(System.String)">
+            <summary>
+            Indicates whether the specified string is null or a <see cref="T:System.String"/>.Empty string
+            </summary>
+            <param name="source"></param>
+            <returns>
+            True if the value parameter is null or an empty string (""); otherwise, false
+            </returns>
+        </member>
+        <member name="M:SwissArmyKnife.StringExtensions.IsNullOrWhiteSpace(System.String)">
+            <summary>
+            Indicates whether a specified string is null, empty, or consists only
+            of white-space characters
+            </summary>
+            <param name="source">
+            </param>
+            <returns>
+            true if the value parameter is null or System.String.Empty, or if
+            value consists exclusively of white-space characters
+            </returns>
+        </member>
+        <member name="M:SwissArmyKnife.StringExtensions.Contains(System.String,System.String,System.StringComparison)">
+            <summary>
+            Returns a value indicating whether a specified substring occurs
+            within this string
+            </summary>
+            <param name="source">
+            </param>
+            <param name="value">
+            The string to seek
+            </param>
+            <param name="comparisonType">
+            One of the enumeration values that specifies the rules for the search
+            </param>
+            <returns>
+            true if the value parameter occurs within this string, or if value is
+            the empty string (""); otherwise, false
+            </returns>
+        </member>
+    </members>
+</doc>
