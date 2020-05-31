@@ -52,7 +52,7 @@ namespace INFO702_Assignment3
             mouseDown = false;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             resultsBox.Clear();
 

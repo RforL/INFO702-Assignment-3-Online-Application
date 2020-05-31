@@ -1,0 +1,759 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AtleX.HaveIBeenPwned</name>
+    </assembly>
+    <members>
+        <member name="T:AtleX.HaveIBeenPwned.Breach">
+            <summary>
+            Represents a single breach in the system
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.Breach.Name">
+            <summary>
+            Gets or sets the name of the breach
+            </summary>
+        </member>
+        <member name="T:AtleX.HaveIBeenPwned.BreachMode">
+            <summary>
+            Represents the breach mode
+            </summary>
+        </member>
+        <member name="F:AtleX.HaveIBeenPwned.BreachMode.Default">
+            <summary>
+            The default, verified and unverified, breaches
+            </summary>
+        </member>
+        <member name="F:AtleX.HaveIBeenPwned.BreachMode.ExcludeUnverified">
+            <summary>
+            Exclude unverified breaches
+            </summary>
+        </member>
+        <member name="F:AtleX.HaveIBeenPwned.BreachMode.All">
+            <summary>
+            Include all breaches
+            </summary>
+        </member>
+        <member name="T:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient">
+            <summary>
+            Represents an <see cref="T:AtleX.HaveIBeenPwned.IHaveIBeenPwnedClient"/> that communicates via HTTPS with
+            the HaveIBeenPwned.com API
+            </summary>
+        </member>
+        <member name="F:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient._clientSettings">
+            <summary>
+            Gets the <see cref="T:AtleX.HaveIBeenPwned.HaveIBeenPwnedClientSettings"/> for this <see cref="T:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient"/>
+            </summary>
+        </member>
+        <member name="F:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient._httpClient">
+            <summary>
+            Gets the <see cref="T:System.Net.Http.HttpClient"/> to use
+            </summary>
+        </member>
+        <member name="F:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient._enableClientDisposing">
+            <summary>
+            Gets whether the <see cref="T:System.Net.Http.HttpClient"/> must be disposed or not
+            </summary>
+            <remarks>
+            When we create the <see cref="T:System.Net.Http.HttpClient"/> ourselves, it must be
+            disposed. When it was injected via the constructor, we must not
+            dispose it. After all, the <see cref="T:System.Net.Http.HttpClient"/> can be used
+            by the callee too and it would be rude and error-prone to dispose
+            it in that case.
+            </remarks>
+        </member>
+        <member name="F:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.ApiBaseUri">
+            <summary>
+            Gets the base uri of the HaveIBeenPwned.com API
+            </summary>
+        </member>
+        <member name="F:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.PwnedPasswordsBaseUri">
+            <summary>
+            Gets the base uri of the HaveIBeenPwned.com Pwned PAsswords API
+            </summary>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.#ctor(AtleX.HaveIBeenPwned.HaveIBeenPwnedClientSettings)">
+            <summary>
+            Initializes a new instance of <see cref="T:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient"/> with the
+            specified <see cref="T:AtleX.HaveIBeenPwned.HaveIBeenPwnedClientSettings"/> and <see cref="T:System.Net.Http.HttpClient"/>
+            </summary>
+            <param name="settings">
+            The <see cref="T:AtleX.HaveIBeenPwned.HaveIBeenPwnedClientSettings"/> to use
+            </param>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.#ctor(AtleX.HaveIBeenPwned.HaveIBeenPwnedClientSettings,System.Net.Http.HttpClient)">
+            <summary>
+            Initializes a new instance of <see cref="T:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient"/> with the
+            specified <see cref="T:AtleX.HaveIBeenPwned.HaveIBeenPwnedClientSettings"/> and <see cref="T:System.Net.Http.HttpClient"/>
+            </summary>
+            <param name="settings">
+            The <see cref="T:AtleX.HaveIBeenPwned.HaveIBeenPwnedClientSettings"/> to use
+            </param>
+            <param name="client">
+            The <see cref="T:System.Net.Http.HttpClient"/> to use when communicating with the
+            HaveIBeenPwned API
+            </param>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.GetAllBreachesAsync">
+            <summary>
+            Get all site breaches in the system
+            </summary>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with the collection of every
+            <see cref="T:AtleX.HaveIBeenPwned.SiteBreach"/> in the system
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.GetAllBreachesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get all site breaches in the system
+            </summary>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for this operation
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with the collection of every
+            <see cref="T:AtleX.HaveIBeenPwned.SiteBreach"/> in the system
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.GetBreachesAsync(System.String)">
+            <summary>
+            Get the breaches for an account
+            </summary>
+            <param name="account">
+            The account to get the breaches for
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with the collection of every
+            <see cref="T:AtleX.HaveIBeenPwned.Breach"/> the account was found in
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.GetBreachesAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the breaches for an account
+            </summary>
+            <param name="account">
+            The account to get the breaches for
+            </param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for this operation
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with the collection of every
+            <see cref="T:AtleX.HaveIBeenPwned.Breach"/> the account was found in
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.GetBreachesAsync(System.String,AtleX.HaveIBeenPwned.BreachMode)">
+            <summary>
+            Get the breaches for an account
+            </summary>
+            <param name="account">
+            The account to get the breaches for
+            </param>
+            <param name="modes">
+            The <see cref="T:AtleX.HaveIBeenPwned.BreachMode"/> flags to specify extra breaches to get
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with the collection of every
+            <see cref="T:AtleX.HaveIBeenPwned.Breach"/> the account was found in
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.GetBreachesAsync(System.String,AtleX.HaveIBeenPwned.BreachMode,System.Threading.CancellationToken)">
+            <summary>
+            Get the breaches for an account
+            </summary>
+            <param name="account">
+            The account to get the breaches for
+            </param>
+            <param name="modes">
+            The <see cref="T:AtleX.HaveIBeenPwned.BreachMode"/> flags to specify extra breaches to get
+            </param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for this operation
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with the collection of every
+            <see cref="T:AtleX.HaveIBeenPwned.Breach"/> the account was found in
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.GetPastesAsync(System.String)">
+            <summary>
+            Get the pastes for an email address
+            </summary>
+            <param name="emailAddress">
+            The email address to get the pastes for
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with the collection of every
+            <see cref="T:AtleX.HaveIBeenPwned.Paste"/> the email address was found in
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.GetPastesAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the pastes for an email address
+            </summary>
+            <param name="emailAddress">
+            The email address to get the pastes for
+            </param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for this operation
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with the collection of every
+            <see cref="T:AtleX.HaveIBeenPwned.Paste"/> the email address was found in
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.IsPwnedPasswordAsync(System.String)">
+            <summary>
+            Gets whether the specified password is found in a password list
+            </summary>
+            <param name="password">
+            The password to check
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with a <see cref="T:System.Boolean"/>
+            indicating whether the password was found or not
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.IsPwnedPasswordAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets whether the specified password is found in a password list
+            </summary>
+            <param name="password">
+            The password to check
+            </param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for this operation
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with a <see cref="T:System.Boolean"/>
+            indicating whether the password was found or not
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.Dispose(System.Boolean)">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or
+            resetting unmanaged resources
+            </summary>
+            <param name="disposing">
+            True when disposing, false when finalizing
+            </param>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.GetAllBreachesInternalAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get all site breaches in the system
+            </summary>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for this operation
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with the collection of every
+            <see cref="T:AtleX.HaveIBeenPwned.SiteBreach"/> in the system
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.GetBreachesInternalAsync(System.String,AtleX.HaveIBeenPwned.BreachMode,System.Threading.CancellationToken)">
+            <summary>
+            Get the breaches for an account
+            </summary>
+            <param name="account">
+            The account to get the breaches for
+            </param>
+            <param name="modes">
+            The <see cref="T:AtleX.HaveIBeenPwned.BreachMode"/> flags to specify extra breaches to get
+            </param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for this operation
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with the collection of every
+            <see cref="T:AtleX.HaveIBeenPwned.Breach"/> the account was found in
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.GetPastesInternalAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the pastes for an email address
+            </summary>
+            <param name="emailAddress">
+            The email address to get the pastes for
+            </param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for this operation
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with the collection of every
+            <see cref="T:AtleX.HaveIBeenPwned.Paste"/> the email address was found in
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.IsPwnedPasswordInternalAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets whether the specified password is found in a password list
+            </summary>
+            <param name="password">
+            The password to check
+            </param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for this operation
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with a <see cref="T:System.Boolean"/>
+            indicating whether the password was found or not
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.GetAuthenticatedAsync``1(System.Uri,System.Threading.CancellationToken)">
+            <summary>
+            Performs an GET request to the specified uri
+            </summary>
+            <typeparam name="T">
+            The type to deserialize the JSON content of the request to
+            </typeparam>
+            <param name="url">
+            The uri to request
+            </param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for this operation
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> of the specified type
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.GetAsync``1(System.Uri,System.Threading.CancellationToken)">
+            <summary>
+            Performs a GET request to the specified uri
+            </summary>
+            <typeparam name="T">
+            The type to deserialize the JSON content of the request to
+            </typeparam>
+            <param name="url">
+            The uri to request
+            </param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for this operation
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> of the specified type
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.GetAsync``1(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>
+            Performs a GET request to the specified uri
+            </summary>
+            <typeparam name="T">
+            The type to deserialize the JSON content of the request to
+            </typeparam>
+            <param name="requestMessage">
+            The <see cref="T:System.Net.Http.HttpRequestMessage"/> to send
+            </param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for this operation
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> of the specified type
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.GetAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>
+            Performs a GET request to the specified uri
+            </summary>
+            <param name="requestMessage">
+            The <see cref="T:System.Net.Http.HttpRequestMessage"/> to send
+            </param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for this operation
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> of <see cref="T:System.IO.Stream"/>
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.HandleErrorResponse(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Handle the error response from the specified <see cref="T:System.Net.Http.HttpResponseMessage"/>
+            </summary>
+            <param name="response">
+            The <see cref="T:System.Net.Http.HttpResponseMessage"/> to handle the errors for
+            </param>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient.ConfigureHttpClient(System.Net.Http.HttpClient,AtleX.HaveIBeenPwned.HaveIBeenPwnedClientSettings)">
+            <summary>
+            Configure the <see cref="T:System.Net.Http.HttpClient"/> with the specified <see cref="T:AtleX.HaveIBeenPwned.HaveIBeenPwnedClientSettings"/>
+            </summary>
+            <param name="client">
+            The <see cref="T:System.Net.Http.HttpClient"/> to setup
+            </param>
+            <param name="settings">
+            The <see cref="T:AtleX.HaveIBeenPwned.HaveIBeenPwnedClientSettings"/>
+            </param>
+            <returns>
+            The configured <see cref="T:System.Net.Http.HttpClient"/>
+            </returns>
+        </member>
+        <member name="T:AtleX.HaveIBeenPwned.HaveIBeenPwnedClientException">
+            <summary>
+            Represents an <see cref="T:System.Exception"/> that occured in an <see cref="T:AtleX.HaveIBeenPwned.IHaveIBeenPwnedClient"/>
+            </summary>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClientException.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:AtleX.HaveIBeenPwned.HaveIBeenPwnedClientException"/>
+            </summary>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClientException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of <see cref="T:AtleX.HaveIBeenPwned.HaveIBeenPwnedClientException"/>
+            with the specified error message
+            </summary>
+            <param name="message">
+            The message that describes the error
+            </param>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.HaveIBeenPwnedClientException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of <see cref="T:AtleX.HaveIBeenPwned.HaveIBeenPwnedClientException"/>
+            with the specified error message and inner <see cref="T:System.Exception"/>
+            </summary>
+            <param name="message">
+            The message that describes the error
+            </param>
+            <param name="innerException">
+            The <see cref="T:System.Exception"/> or the error
+            </param>
+        </member>
+        <member name="T:AtleX.HaveIBeenPwned.HaveIBeenPwnedClientSettings">
+            <summary>
+            Represents the settings for an <see cref="T:AtleX.HaveIBeenPwned.HaveIBeenPwnedClient"/>
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.HaveIBeenPwnedClientSettings.ApplicationName">
+            <summary>
+            Gets or sets the application name (defaults to "AtleX.HaveIBeenPwned")
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.HaveIBeenPwnedClientSettings.TimeOut">
+            <summary>
+            Gets or sets the <see cref="T:System.TimeSpan"/> as timeout when communicating
+            with the HaveIBeenPwned.com service (defaults to 10 seconds)
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.HaveIBeenPwnedClientSettings.ApiKey">
+            <summary>
+            Gets or sets the API key used to authenticate when checking breaches or pastes
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.HaveIBeenPwnedClientSettings.Default">
+            <summary>
+            Gets the default <see cref="T:AtleX.HaveIBeenPwned.HaveIBeenPwnedClientSettings"/>
+            </summary>
+        </member>
+        <member name="T:AtleX.HaveIBeenPwned.Helpers.KAnonimityHelper">
+            <summary>
+            Represents a helper for K-Anonimity functionality
+            </summary>
+        </member>
+        <member name="F:AtleX.HaveIBeenPwned.Helpers.KAnonimityHelper.KAnonimityPartLength">
+            <summary>
+            Gets the length of the KAnonimity part
+            to send to the HaveIBeenPwned API
+            </summary>
+        </member>
+        <member name="F:AtleX.HaveIBeenPwned.Helpers.KAnonimityHelper.KAnonimitySuffixLength">
+            <summary>
+            Gets the length of the remainder of the
+            hash that serves as the suffix of the
+            KAnonimity system
+            </summary>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.Helpers.KAnonimityHelper.GetKAnonimityPartsForPassword(System.String)">
+            <summary>
+            Gets SHA1 hash for the specified password
+            </summary>
+            <param name="password">
+            The password to get the SHA1 hash from
+            </param>
+            <returns>
+            The SHA1 hash of the specified password
+            </returns>
+        </member>
+        <member name="T:AtleX.HaveIBeenPwned.IHaveIBeenPwnedBreachesClient">
+            <summary>
+            Represents a client for the breaches functionality of the HaveIBeenPwned service
+            </summary>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.IHaveIBeenPwnedBreachesClient.GetAllBreachesAsync">
+            <summary>
+            Get all site breaches in the system
+            </summary>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with the collection of every
+            <see cref="T:AtleX.HaveIBeenPwned.SiteBreach"/> in the system
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.IHaveIBeenPwnedBreachesClient.GetAllBreachesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get all site breaches in the system
+            </summary>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for this operation
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with the collection of every
+            <see cref="T:AtleX.HaveIBeenPwned.SiteBreach"/> in the system
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.IHaveIBeenPwnedBreachesClient.GetBreachesAsync(System.String)">
+            <summary>
+            Get the breaches for an account
+            </summary>
+            <param name="account">
+            The account to get the breaches for
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with the collection of every
+            <see cref="T:AtleX.HaveIBeenPwned.Breach"/> the account was found in
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.IHaveIBeenPwnedBreachesClient.GetBreachesAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the breaches for an account
+            </summary>
+            <param name="account">
+            The account to get the breaches for
+            </param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for this operation
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with the collection of every
+            <see cref="T:AtleX.HaveIBeenPwned.Breach"/> the account was found in
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.IHaveIBeenPwnedBreachesClient.GetBreachesAsync(System.String,AtleX.HaveIBeenPwned.BreachMode)">
+            <summary>
+            Get the breaches for an account
+            </summary>
+            <param name="account">
+            The account to get the breaches for
+            </param>
+            <param name="modes">
+            The <see cref="T:AtleX.HaveIBeenPwned.BreachMode"/> flags to specify extra breaches to get
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with the collection of every
+            <see cref="T:AtleX.HaveIBeenPwned.Breach"/> the account was found in
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.IHaveIBeenPwnedBreachesClient.GetBreachesAsync(System.String,AtleX.HaveIBeenPwned.BreachMode,System.Threading.CancellationToken)">
+            <summary>
+            Get the breaches for an account
+            </summary>
+            <param name="account">
+            The account to get the breaches for
+            </param>
+            <param name="modes">
+            The <see cref="T:AtleX.HaveIBeenPwned.BreachMode"/> flags to specify extra breaches to get
+            </param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for this operation
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with the collection of every
+            <see cref="T:AtleX.HaveIBeenPwned.Breach"/> the account was found in
+            </returns>
+        </member>
+        <member name="T:AtleX.HaveIBeenPwned.IHaveIBeenPwnedClient">
+            <summary>
+            Represents a client for the HaveIBeenPwned service
+            </summary>
+        </member>
+        <member name="T:AtleX.HaveIBeenPwned.IHaveIBeenPwnedPasswordClient">
+            <summary>
+            Represents a client for the leaked passwords functionality of the HaveIBeenPwned service
+            </summary>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.IHaveIBeenPwnedPasswordClient.IsPwnedPasswordAsync(System.String)">
+            <summary>
+            Gets whether the specified password is found in a password list
+            </summary>
+            <param name="password">
+            The password to check
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with a <see cref="T:System.Boolean"/>
+            indicating whether the password was found or not
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.IHaveIBeenPwnedPasswordClient.IsPwnedPasswordAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets whether the specified password is found in a password list
+            </summary>
+            <param name="password">
+            The password to check
+            </param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for this operation
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with a <see cref="T:System.Boolean"/>
+            indicating whether the password was found or not
+            </returns>
+        </member>
+        <member name="T:AtleX.HaveIBeenPwned.IHaveIBeenPwnedPastesClient">
+            <summary>
+            Represents a client for the pastes functionality of the HaveIBeenPwned service
+            </summary>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.IHaveIBeenPwnedPastesClient.GetPastesAsync(System.String)">
+            <summary>
+            Get the pastes for an email address
+            </summary>
+            <param name="emailAddress">
+            The email address to get the pastes for
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with the collection of every
+            <see cref="T:AtleX.HaveIBeenPwned.Paste"/> the email address was found in
+            </returns>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.IHaveIBeenPwnedPastesClient.GetPastesAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the pastes for an email address
+            </summary>
+            <param name="emailAddress">
+            The email address to get the pastes for
+            </param>
+            <param name="cancellationToken">
+            The <see cref="T:System.Threading.CancellationToken"/> for this operation
+            </param>
+            <returns>
+            An awaitable <see cref="T:System.Threading.Tasks.Task`1"/> with the collection of every
+            <see cref="T:AtleX.HaveIBeenPwned.Paste"/> the email address was found in
+            </returns>
+        </member>
+        <member name="T:AtleX.HaveIBeenPwned.InvalidApiKeyException">
+            <summary>
+            Represents a <see cref="T:AtleX.HaveIBeenPwned.HaveIBeenPwnedClientException"/> for an unknown or expired API key
+            </summary>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.InvalidApiKeyException.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:AtleX.HaveIBeenPwned.InvalidApiKeyException"/>
+            </summary>
+        </member>
+        <member name="T:AtleX.HaveIBeenPwned.Paste">
+            <summary>
+            Represents a breach from a paste
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.Paste.Source">
+            <summary>
+            Gets or sets the source of the paste
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.Paste.Id">
+            <summary>
+            Gets or sets the Id of the paste
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.Paste.Title">
+            <summary>
+            Gets or sets the title of the paste
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.Paste.Date">
+            <summary>
+            Gets or sets the <see cref="T:System.DateTime"/> the paste was posted
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.Paste.EmailCount">
+            <summary>
+            Gets or sets the number of accounts in the paste
+            </summary>
+        </member>
+        <member name="T:AtleX.HaveIBeenPwned.RateLimitExceededException">
+            <summary>
+            Represents a <see cref="T:AtleX.HaveIBeenPwned.HaveIBeenPwnedClientException"/> for exceeding the rate limit
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.RateLimitExceededException.RetryAfter">
+            <summary>
+            Gets the number of seconds to wait before retrying
+            </summary>
+        </member>
+        <member name="M:AtleX.HaveIBeenPwned.RateLimitExceededException.#ctor(System.TimeSpan)">
+            <summary>
+            Initializes a new instance of <see cref="T:AtleX.HaveIBeenPwned.RateLimitExceededException"/>
+            with the specified number of seconds to retry after
+            </summary>
+            <param name="retryAfter">
+            The specified number of seconds to retry after
+            </param>
+        </member>
+        <member name="T:AtleX.HaveIBeenPwned.SiteBreach">
+            <summary>
+            Represents a single site breach in the system
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.SiteBreach.Name">
+            <summary>
+            Gets or sets the name of the breach
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.SiteBreach.Title">
+            <summary>
+            Gets or sets the title of the breach
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.SiteBreach.BreachDate">
+            <summary>
+            Gets or sets the date of the breach
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.SiteBreach.AddedDate">
+            <summary>
+            Gets or sets the date when the breach was added to HaveIBeenPwned.com
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.SiteBreach.ModifiedDate">
+            <summary>
+            Gets or sets the date when the breach was last modified
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.SiteBreach.PwnCount">
+            <summary>
+            Gets or sets the number of accounts in the breach
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.SiteBreach.Description">
+            <summary>
+            Gets or sets the description of the breach
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.SiteBreach.DataClasses">
+            <summary>
+            Gets or sets the types of data included in the breach
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.SiteBreach.IsVerified">
+            <summary>
+            Gets or sets whether the breach is verified or not
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.SiteBreach.IsFabricated">
+            <summary>
+            Gets or sets whether the breach is fabricated or not
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.SiteBreach.IsSensitive">
+            <summary>
+            Gets or sets whether the breach is sensitive or not
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.SiteBreach.IsRetired">
+            <summary>
+            Gets or sets whether the breach is retired or not
+            </summary>
+        </member>
+        <member name="P:AtleX.HaveIBeenPwned.SiteBreach.IsSpamList">
+            <summary>
+            Gets or sets whether the breach is from a spam list or not
+            </summary>
+        </member>
+    </members>
+</doc>
